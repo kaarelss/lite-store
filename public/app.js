@@ -2,7 +2,8 @@
  
 angular.module('liteStore', [
     'ngRoute',
-    'cart'
+    'cart',
+    'checkout'
 ]).
 config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({
