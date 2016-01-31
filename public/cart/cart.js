@@ -8,6 +8,8 @@ angular.module('cart', ['ngRoute'])
     controller: 'CartCtrl'
   });
 }])
+
+// Karels
  
 .controller('CartCtrl', [function() {
      
