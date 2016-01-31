@@ -1,0 +1,4 @@
+
+# Ignore all node modules. To install them - type npm install
+/.idea/*
+/node_modules/*
