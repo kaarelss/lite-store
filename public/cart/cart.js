@@ -10,16 +10,17 @@ angular.module('cart', ['ngRoute'])
 }])
  
 .controller('CartCtrl', ['$scope', function($scope) {
+
     $scope.shopData = [{
       'item': 'Hard Disk',
       'id': 'HD',
       'selected': 0,
       'prices': [{
         'size': '200GB',
-        'price': '2000'
+        'price': '30.00'
       }, {
         'size': '400GB',
-        'price': '4000'
+        'price': '60.00'
       }]
     }, {
       'item': 'CPU',
@@ -27,10 +28,10 @@ angular.module('cart', ['ngRoute'])
       'selected': 0,
       'prices': [{
         'size': 'i3',
-        'price': '20000'
+        'price': '80.00'
       }, {
         'size': 'i5',
-        'price': '25000'
+        'price': '110.00'
       }]
     }, {
       'item': 'Monitor',
@@ -38,10 +39,10 @@ angular.module('cart', ['ngRoute'])
       'selected': 0,
       'prices': [{
         'size': '16\'',
-        'price': '3000'
+        'price': '125.00'
       }, {
         'size': '19\'',
-        'price': '5000'
+        'price': '150.00'
       }]
     }, {
       'item': 'Optical Mouse',
@@ -49,10 +50,10 @@ angular.module('cart', ['ngRoute'])
       'selected': 0,
       'prices': [{
         'size': 'Optical',
-        'price': '350'
+        'price': '6.00'
       }, {
         'size': 'Advanced',
-        'price': '550'
+        'price': '8.00'
       }]
     }, {
       'item': 'RAM',
@@ -60,10 +61,10 @@ angular.module('cart', ['ngRoute'])
       'selected': 0,
       'prices': [{
         'size': '4GB',
-        'price': '4000'
+        'price': '20.00'
       }, {
         'size': '8GB',
-        'price': '8000'
+        'price': '40.00'
       }]
     }, {
       'item': 'USB Keyboard',
@@ -71,10 +72,40 @@ angular.module('cart', ['ngRoute'])
       'selected': 0,
       'prices': [{
         'size': 'Standard',
-        'price': '2500'
+        'price': '10.00'
       }, {
         'size': 'Advanced',
-        'price': '4500'
+        'price': '15.00'
       }]
     }];
-}]);
+
+    $scope.total = function() {
+      var t = 0;
+
+      for (var k in $scope.shopData) {
+        t += parseInt($scope.shopData[k].selected);
+      }
+
+      return t;
+
+    }
+
+}])
+
+.directive('checkList', function() {
+  return {
+    restrict: 'E',
+    scope: {
+      option: '=',
+      name: '=',
+      selected: '=selected'
+    },
+    template: function(elem, attrs) {
+      return '<div class="panel-body">\
+                    <div class="radio" ng-repeat="i in option">\
+                        <label><input type="radio" ng-model="$parent.selected" ng-value="{{i.price}}" name="{{name}}">{{i.size}} EUR {{i.price}}</label>\
+                    </div>\
+                </div>'
+    }
+  };
+});
